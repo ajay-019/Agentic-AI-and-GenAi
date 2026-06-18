@@ -1,0 +1,33 @@
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_anthropic import ChatAnthropic
+from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain.schema.runnable import RunnableParallel
+from dotenv import load_dotenv
+
+load_dotenv()
+model1 = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.9)
+model2 = ChatAntropic(model="claude-3")
+
+prompt1 = PromptTemplate(
+    template='give me a detailed report on {topic}',
+    input_variables=['topic']
+)
+
+prompt2 = PromptTemplate(
+    template='generate the quiz on {text} ,make sure each question has 4 option and 1 of 4 is correct',
+    input_variables=['text']
+)
+
+prompt3= PromptTemplate(
+    template='Merge the provided notes and quiz into a single document \n notes -> {notes} and {quiz}'
+)
+
+parser = StrOutputParser()
+
+parallel_chain = 
+
+
+
+chain1=prompt1 | model1 | parser
+chain2=prompt2 | model2 | parser
